@@ -1,0 +1,342 @@
+/*
+steve.a.mccluskey@gmail.com
+No rights reserved.
+*/
+
+/* variables: */
+
+:root {
+  --main-background-color: #d8ecfd80;
+  --header-background-color: #e5ff00;
+  --header-text-color: rgb(207, 82, 82);
+
+  --regular-box-background-color: rgb(226, 238, 248);
+  --regular-box-background-hover: rgb(131, 131, 131);
+
+  --regular-box-h1-background-color: #8cee5e;
+  --regular-box-h1-text-color: rgb(163, 7, 7);
+
+  --regular-box-main-temp-text-color: rgb(45, 13, 223);
+
+  --regular-box-weather-bold-color: rgb(84, 29, 235);
+  --regular-box-weather-font-color: rgb(180, 4, 4);
+
+  --widebox-background-color: rgb(231, 239, 246);
+  --widebox-hover-background-color: rgb(179, 179, 179);
+  --widebox-h1-color: rgb(76, 14, 245);
+  --widebox-h1-background-color: #02f1f5;
+
+  --idColor: #ff0000;
+
+  --humidity-color: rgb(17, 238, 28);
+}
+
+/* resets: */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/* globals: */
+body {
+  background-color: var(--main-background-color);
+  margin: 20px;
+}
+
+.header {
+  font-size: 35px;
+  text-shadow: -1px -1px 0px rgb(26, 2, 241);
+  width: 53rem;
+  text-align: center;
+  margin: 1rem;
+  box-shadow: 0px 0px 35px 14px rgba(0, 0, 0, 0.15);
+  border-radius: 0.5rem;
+  background-color: var(--header-background-color);
+  color: var(--header-text-color);
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* groupings by row */
+.groupings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  width: 100vw;
+}
+
+/* regular size box */
+.regularBox {
+  display: flex;
+  flex-direction: column;
+  width: 8rem;
+  margin: 0.25rem;
+  height: 10rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 1px 15px 5px rgba(240, 109, 109, 0.15);
+  padding: 0.25rem;
+  transition: all 1s;
+  background-color: var(--regular-box-background-color);
+  background-size: cover;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.regularBox:hover {
+  background-color: var(--regular-box-background-hover);
+}
+
+.weatherIconCurrent {
+  background-image: var(--weatherCurrentIcon);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.weatherIconToday {
+  background-image: var(--weatherTodayIcon);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.weatherIconTomorrow {
+  background-image: var(--weatherTomorrowIcon);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* header font */
+.regularBox h1 {
+  font-size: 19px;
+  text-shadow: -2px -1px 5px rgb(225, 241, 2);
+  width: 95%;
+  border-radius: 0.5rem;
+  /* text-align: center; */
+  font-weight: bold;
+  padding: 2px;
+  color: var(--regular-box-h1-text-color);
+  background-color: var(--regular-box-h1-background-color);
+  text-align: center;
+}
+
+/* large font for temps */
+.regularBox mainTemp {
+  font-size: 38px;
+  color: var(--regular-box-main-temp-text-color);
+  /* padding: 1.2rem 10px; */
+  /* margin: 10px; */
+  /* margin-bottom: auto; */
+  font-weight: bold;
+  text-shadow: -1px -1px 5px rgb(117, 241, 2);
+}
+
+/* font for temp sensor IDs */
+.regularBox idFont {
+  font-size: 13px;
+  padding: 4px;
+  color: var(--idColor);
+  /* vertical-align: bottom; */
+}
+
+.regularBox weatherBold {
+  font-size: 32px;
+  padding: 8px;
+  font-weight: bold;
+  color: var(--regular-box-weather-bold-color);
+  text-shadow: -1px -1px 01px rgb(214, 243, 243);
+  text-align: center;
+}
+
+.regularBox weatherFont {
+  font-size: 23px;
+  color: var(--regular-box-weather-font-color);
+  text-shadow: -1px -1px 01px rgb(208, 230, 10);
+  font-weight: bold;
+  /* padding: 5px;
+   */
+  /* margin: 5px; */
+}
+
+.regularBox p1 {
+  font-size: 20px;
+  padding: 5px;
+}
+
+.regularBox p3 {
+  font-size: 15px;
+}
+
+/* wide boxes in fourth row */
+.wideBox {
+  width: 420px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 0.4rem;
+  height: 8rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0px 1px 15px 5px rgba(0, 0, 0, 0.15);
+  transition: all 1s;
+  background-color: var(--widebox-background-color);
+}
+
+.wideBox:hover {
+  background-color: var(--widebox-hover-background-color);
+}
+.wideBox idFont {
+  font-size: 13px;
+  padding: 4px;
+  color: var(--idColor);
+  /* vertical-align: bottom; */
+}
+.wideBox h1 {
+  width: 100%;
+  height: 1.2rem;
+  font-size: 21px;
+  padding: 0.5rem;
+  color: var(--widebox-h1-color);
+  background-color: var(--widebox-h1-background-color);
+  text-align: center;
+}
+
+/* inside wide boxes */
+.wideBoxChild {
+  display: flex;
+  flex-wrap: wrap;
+  width: 40%;
+  margin: 0.5rem;
+  height: 80px;
+  border-radius: 0.5rem;
+  align-items: center;
+  flex-direction: column;
+}
+
+.wideBoxChild p1,
+p2,
+p3 {
+  text-align: center;
+  font-size: 22px;
+  width: 100%;
+}
+
+.wideBoxChild p1 {
+  color: var(--regular-box-h1-text-color);
+}
+
+.wideBoxChild p2 {
+  font-size: 21px;
+  font-weight: bold;
+  color: var(--regular-box-main-temp-text-color);
+}
+
+.wideBoxChild p3 {
+  font-size: 15px;
+}
+
+button {
+  border-radius: 0.5rem;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  text-shadow: -1px -1px 1px #2f6627;
+}
+
+.greenButton {
+  border: 4px solid #18ab29;
+  background-color: #44c767;
+  color: #ffffff;
+}
+
+.redButton {
+  border: 4px solid #f70606;
+  background-color: #ff0808;
+  color: #ffffff;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Dosis:200,400,500,600);
+.compass {
+  display: block;
+  /* width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  box-shadow: 0 0 10px rgba(14, 25, 184, 0.85); */
+  position: relative;
+  font-family: "Dosis";
+  color: rgb(253, 255, 131);
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+  padding: 0px 0px 8px;
+}
+
+.direction {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  /* left: 10%; */
+  width: 100%;
+  height: 100%;
+  line-height: 60px;
+  /* display: block; */
+  margin-top: -40px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.gusts {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  /* left: 10%; */
+  width: 100%;
+  height: 100%;
+  line-height: 60px;
+  /* display: block; */
+  margin-top: -10px;
+  font-size: 20px;
+  /* font-weight: bold; */
+}
+
+.humidity {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 28%;
+  /* left: 10%; */
+  width: 100%;
+  height: 100%;
+  line-height: 60px;
+  /* display: block; */
+  margin-top: -10px;
+  margin-left: -15px;
+  font-size: 50px;
+  font-weight: bold;
+  color: var(--humidity-color);
+}
+
+.arrowPos {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  top: -0px;
+}
+
+.arrow {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 20px solid red;
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  margin-left: -5px;
+  z-index: 99;
+}

@@ -1,0 +1,224 @@
+<!--
+steve.a.mccluskey@gmail.com
+No rights reserved.
+
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" defer src="scripts.js"></script>
+    <title>Raspberry Pi Weather Station</title>
+  </head>
+
+  <body
+    onload="getPiData(), getPiDoors(), getPiWeather(), getSammyDoorStatus()"
+  >
+    <div class="header">Welcome to Steve's Raspberry Pi Weather Station!</div>
+    <div class="main">
+      <!-- first row -->
+      <div class="groupings">
+        <div class="regularBox weatherIconCurrent">
+          <h1>Current</h1>
+
+          <weatherBold>
+            <span id="weatherCurrentDescription">...</span>
+          </weatherBold>
+
+          <weatherFont>Feels Like:</weatherFont>
+          <weatherFont><span id="feelsLike">...</span>°F</weatherFont>
+        </div>
+
+        <div class="regularBox weatherIconToday">
+          <h1>Today</h1>
+          <weatherBold>
+            <span id="descriptionToday">...</span>
+          </weatherBold>
+          <div>
+            <weatherFont>High:</weatherFont>
+            <weatherFont><span id="highToday">...</span>°F</weatherFont>
+          </div>
+          <div>
+            <weatherFont>Low:</weatherFont>
+            <weatherFont><span id="lowToday">...</span>°F</weatherFont>
+          </div>
+        </div>
+
+        <div class="regularBox weatherIconTomorrow">
+          <h1>Tomorrow</h1>
+          <weatherBold>
+            <span id="descriptionTomorrow">...</span>
+          </weatherBold>
+          <div>
+            <weatherFont>High:</weatherFont>
+            <weatherFont><span id="highTomorrow">...</span>F°</weatherFont>
+          </div>
+          <div>
+            <weatherFont>Low:</weatherFont>
+            <weatherFont><span id="lowTomorrow">...</span>°F</weatherFont>
+          </div>
+        </div>
+
+        <div class="regularBox">
+          <h1>Outside</h1>
+          <mainTemp><span id="outsideTemp">...</span>°F</mainTemp>
+          <idFont>ID: <span id="outsideId">...</span></idFont>
+        </div>
+
+        <div class="regularBox">
+          <h1>Humidity</h1>
+          <div class="compass">
+            <img
+              src="http://vulture2600.dyndns.org:5016/img/humidity.jpeg"
+              width="110"
+              height="110"
+            />
+
+            <div class="humidity"><span id="humidity">...</span></div>
+          </div>
+        </div>
+
+        <div class="regularBox">
+          <h1>Wind</h1>
+          <div class="compass">
+            <img
+              src="http://vulture2600.dyndns.org:5016/img/compass.jpg"
+              width="110"
+              height="110"
+            />
+            <div class="direction"><span id="windSpeed">...</span> Mph</div>
+            <div class="gusts">^<span id="windGusts">...</span> Mph</div>
+            <div class="arrowPos" id="arrowPos">
+              <div class="arrow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- second row -->
+      <div class="groupings">
+        <div class="regularBox">
+          <h1>Living Room</h1>
+          <mainTemp><span id="livingRoomTemp">...</span>°F</mainTemp>
+          <idFont>ID: <span id="livingRoomId">...</span></idFont>
+        </div>
+
+        <div class="regularBox">
+          <h1>Upstairs</h1>
+          <mainTemp><span id="upstairsTemp">...</span>°F</mainTemp>
+          <idFont>ID: <span id="upstairsId">...</span></idFont>
+        </div>
+
+        <div class="regularBox">
+          <h1>Office</h1>
+          <mainTemp><span id="officeTemp">...</span>°F</mainTemp>
+          <idFont>ID: <span id="officeId">...</span></idFont>
+        </div>
+
+        <div class="regularBox">
+          <h1>Steve's Room</h1>
+          <mainTemp><span id="steveRoomTemp">...</span>°F</mainTemp>
+          <idFont>ID: <span id="steveRoomId">...</span></idFont>
+        </div>
+
+        <div class="regularBox">
+          <h1>Guest Room</h1>
+          <mainTemp><span id="guestRoomTemp">...</span>°F</mainTemp>
+          <idFont>ID: <span id="guestRoomId">...</span></idFont>
+        </div>
+
+        <div class="regularBox">
+          <h1>Attic</h1>
+          <mainTemp><span id="atticTemp">...</span>°F</mainTemp>
+          <idFont>ID: <span id="atticId">...</span></idFont>
+        </div>
+      </div>
+
+      <!-- third row -->
+      <div class="groupings">
+        <div class="regularBox">
+          <h1>Basement</h1>
+          <mainTemp><span id="basementTemp">...</span>°F</mainTemp>
+          <idFont>ID: <span id="basementId">...</span></idFont>
+        </div>
+
+        <div class="regularBox">
+          <h1>Freezer</h1>
+          <mainTemp><span id="freezerTemp">...</span>°F</mainTemp>
+          <idFont>ID: <span id="freezerId">...</span></idFont>
+        </div>
+
+        <div class="regularBox">
+          <h1>Garage</h1>
+          <mainTemp><span id="garageTemp">...</span>°F</mainTemp>
+          <idFont>ID: <span id="garageId">...</span></idFont>
+        </div>
+
+        <div class="regularBox">
+          <h1>Garage Doors</h1>
+          <img id="mainDoor" />
+          <img id="sideDoor" />
+        </div>
+
+        <div class="regularBox">
+          <h1>Sammy's Door</h1>
+          <mainTemp><span id="sammyDoorTemp">...</span>°F</mainTemp>
+          <idFont>ID: <span id="sammyDoorId">...</span></idFont>
+        </div>
+
+        <div class="regularBox">
+          <h1>Sammy's Door</h1>
+          <button
+            class="redButton"
+            type="button"
+            id="lockInEnable"
+            onclick="lockInEnable()"
+          >
+            Enable Lock-In
+          </button>
+          <button
+            class="greenButton"
+            type="button"
+            id="lockInDisable"
+            onclick="lockInDisable()"
+          >
+            Disable Lock-In
+          </button>
+          <img id="sammyDoorImg" />
+        </div>
+      </div>
+
+      <!-- fourth row -->
+      <div class="groupings">
+        <div class="wideBox">
+          <h1>Time Stamps</h1>
+          <div class="wideBoxChild">
+            <p1>Temp Sensors:</p1>
+            <p2><span id="timeStamp">...</span></p2>
+          </div>
+
+          <div class="wideBoxChild">
+            <p1>Weather Data:</p1>
+            <p2><span id="weatherTimeStamp">...</span></p2>
+          </div>
+        </div>
+
+        <div class="wideBox">
+          <h1>Mycology</h1>
+          <div class="wideBoxChild">
+            <p1>Incubation Temp:</p1>
+            <p2><span id="incubatorTemp">...</span>°F</p2>
+            <idFont>ID: <span id="incubatorId">...</span></idFont>
+          </div>
+
+          <div class="wideBoxChild">
+            <p1>Fruiting Chamber:</p1>
+            <p2><span id="fruitingTemp">...</span>°F.</p2>
+            <idFont>ID: <span id="fruitingId">...</span></idFont>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
