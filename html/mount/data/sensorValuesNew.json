@@ -1,0 +1,61 @@
+{
+  "timestamp": [
+    {
+      "dateTime": "2021-07-28 06:16:05"
+    }
+  ], 
+  "sensors": {
+    "fruiting": {
+      "id": "28-000006526e62", 
+      "temp": "83.9"
+    }, 
+    "livingRoom": {
+      "id": "28-000006decbf1", 
+      "temp": "84.2"
+    }, 
+    "upstairs": {
+      "id": "28-000008d4f4c7", 
+      "temp": "83.0"
+    }, 
+    "office": {
+      "id": "28-01192f06da20", 
+      "temp": "84.3"
+    }, 
+    "garage": {
+      "id": "28-000006deba97", 
+      "temp": "80.2"
+    }, 
+    "guestRoom": {
+      "id": "28-01192f095d7f", 
+      "temp": "82.0"
+    }, 
+    "outside": {
+      "id": "28-00000543b4da", 
+      "temp": "74.3"
+    }, 
+    "freezer": {
+      "id": "28-00000557bff3", 
+      "temp": "-1.6"
+    }, 
+    "incubator": {
+      "id": "28-01192f320a61", 
+      "temp": "84.4"
+    }, 
+    "attic": {
+      "id": "28-01192f22b1a4", 
+      "temp": "77.3"
+    }, 
+    "sammyDoor": {
+      "id": "28-000008d3f82d", 
+      "temp": "82.3"
+    }, 
+    "basement": {
+      "id": "28-01192f3de042", 
+      "temp": "79.1"
+    }, 
+    "stevesRoom": {
+      "id": "28-01192ed8aaa3", 
+      "temp": "81.3"
+    }
+  }
+}
