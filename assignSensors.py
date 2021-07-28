@@ -1,3 +1,9 @@
+# steve.a.mccluskey@gmail.com
+# Utility that shows all OneWire temp sensors on the bus and allows you to assign them to the rooms and writes the configuration to the sensorIndex.config file.
+
+
+
+
 import os
 import time
 import glob
