@@ -106,7 +106,7 @@ os.system("sudo python /home/pi/weatherStation/getTemps.py &")
 
 
 #openweathermap.org API Key:
-apiKey    = 'ce6df52db591b8e6b40f75c864518b61'
+apiKey    = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 #Minneapolis, MN, USA.
 lattitude = '44.9398'
 longitude = '-93.2533'
