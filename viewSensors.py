@@ -1,3 +1,8 @@
+# steve.a.mccluskey@gmail.com
+# Utility to display all available OneWire temp sensors on the bus.
+
+
+
 import os
 import time
 import glob
