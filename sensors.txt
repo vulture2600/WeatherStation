@@ -1,0 +1,11 @@
+living room:     bf1 1
+upstairs hall:   4c7 5
+basement:        042 0
+sammys door:     82d 7
+garage:          a97 4
+outside:         4da 2
+attic:           1a4 10
+freezer:         ff3 3
+steve's room:    aa3 9
+office:          a20 6         
+guest room:      d7f 8    

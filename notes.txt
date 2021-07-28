@@ -1,0 +1,12 @@
+sudo apt-get install python-imaging-tk
+
+
+sudo apt-get install apache2 -y
+sudo apt-get install php libapache2-mod-pyp -y
+
+
+sudo nano /etc/fstab
+add /dev/sda1 /var/www/html/mount 
+
+sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
+add sudo python /home/pi/weatherStation/weatherStation.py
