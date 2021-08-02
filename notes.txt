@@ -4,7 +4,7 @@ Install notes:
 2) Install TK-Imaging: sudo apt-get install python-imaging-tk
 3) Install Apache: sudo apt-get install apache2 -y
 4) Install PHP for Apache: sudo apt-get install php libapache2-mod-php -y
-5) Install FTP: sudo apt-get install vsftpd
+5) Install FTP: sudo apt-get install pure-ftpdl
 6) Mount USB stick to html folder:
 sudo nano /etc/fstab
 add /dev/sda1 /var/www/html/mount 
@@ -12,3 +12,5 @@ add /dev/sda1 /var/www/html/mount
 7) Make WeatherStation load on startup: 
 sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
 add sudo python /home/pi/WeatherStation/weatherStation.py
+
+8) Install xscreensaver and disable screen blanking: sudo apt install xscreensaver
