@@ -10,10 +10,6 @@
 # Temps are collected from a background process called updateSensors.py and written to a JSON file called sensorValues.JSON
 # which is located in the web folder at /var/www/html/mount/data. This program reads the JSON file. The webpage also reads it so there's
 # minimal interferance between programs.
-# Sensors are zero indexed.  The sensors are assigned to their respective labels by their index number.
-# Use readSensors.py to print their index number, digital ID and current temp to the console.
-# Edit sensorIndex.config to assign their correct indexes to this screen. Config file is read before reading json file and will update
-# sensors without the need to relaunch this app.
 
 #
 # Hardware Used:
