@@ -1,7 +1,6 @@
 /*
 steve.a.mccluskey@gmail.com
 No rights reserved.
-PUT IN JUNK COMMENTS TO TEST SHIT OUT WITH.
 */
 
 function getPiData() {
