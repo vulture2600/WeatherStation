@@ -1,7 +1,7 @@
 /*
 steve.a.mccluskey@gmail.com
 No rights reserved.
-
+PUT IN JUNK COMMENTS TO TEST SHIT OUT WITH.
 */
 
 function getPiData() {
@@ -9,8 +9,7 @@ function getPiData() {
 
   nocache = "&nocache=" + Math.random() * 1000000;
   var request = new XMLHttpRequest();
-  var server =
-    "sensorValuesNew.json";
+  var server = "sensorValuesNew.json";
 
   request.open("GET", server, true);
 
@@ -105,26 +104,21 @@ function getPiDoors() {
       console.log(piDoorValues);
 
       if (piDoorValues.doorSensors[0]["mainDoor"] == 1) {
-        document.getElementById("mainDoor").src =
-          "garageOpen.gif";
+        document.getElementById("mainDoor").src = "garageOpen.gif";
       } //end if.
       else {
-        document.getElementById("mainDoor").src =
-          "garageClosed.gif";
+        document.getElementById("mainDoor").src = "garageClosed.gif";
       } //end else.
 
       if (piDoorValues.doorSensors[0]["sideDoor"] == 1) {
-        document.getElementById("sideDoor").src =
-          "doorOpen.gif";
+        document.getElementById("sideDoor").src = "doorOpen.gif";
       } //end if.
       else if (piDoorValues.doorSensors[0]["sideDoor"] == 0) {
         if (piDoorValues.doorSensors[0]["sideDoorLock"] == 1) {
-          document.getElementById("sideDoor").src =
-            "doorUnlocked.gif";
+          document.getElementById("sideDoor").src = "doorUnlocked.gif";
         } //end if.
         else if (piDoorValues.doorSensors[0]["sideDoorLock"] == 0) {
-          document.getElementById("sideDoor").src =
-            "doorLocked.gif";
+          document.getElementById("sideDoor").src = "doorLocked.gif";
         } //end else if.
       } //end else if.
     } // end if.
@@ -132,7 +126,6 @@ function getPiDoors() {
   request.send(null);
   setTimeout("getPiDoors()", 1000);
 } //end getPiDoors().
-
 
 function getSammyDoorStatus() {
   //gets data from Raspberry Pi Model 3A+
@@ -151,8 +144,7 @@ function getSammyDoorStatus() {
         sammyDoorStatus.status[0]["doorStatus"] == 1 ||
         sammyDoorStatus.status[0]["doorState"] == 1
       ) {
-        document.getElementById("sammyDoorImg").src =
-          "/img/sammyDoorOpen.gif";
+        document.getElementById("sammyDoorImg").src = "/img/sammyDoorOpen.gif";
       } // end if.
       //
       //
@@ -161,8 +153,7 @@ function getSammyDoorStatus() {
         sammyDoorStatus.status[0]["doorStatus"] == 0 &&
         sammyDoorStatus.status[0]["lockStatus"] == 1
       ) {
-        document.getElementById("sammyDoorImg").src =
-          "img/sammyDoorLocked.gif";
+        document.getElementById("sammyDoorImg").src = "img/sammyDoorLocked.gif";
       } // end if.
       //
       //
