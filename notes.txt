@@ -4,12 +4,14 @@ Install notes:
 2) Install TK-Imaging: sudo apt-get install python-imaging-tk
 3) Install Apache: sudo apt-get install apache2 -y
 4) Install PHP for Apache: sudo apt-get install php libapache2-mod-php -y
-5) Install FTP: sudo apt-get install pure-ftpdl
-6) Mount USB stick to html folder:
+5) Install FTP: sudo apt-get install pure-ftpd
+6) Make directory /home/pi/weatherStation
+7) give FTP rights to pi: sudo chown -R pi:pi /home/pi/weatherStation
+8) Mount USB stick to html folder:
 sudo nano /etc/fstab
 add /dev/sda1 /var/www/html/mount 
 
-7) Make WeatherStation load on startup: 
+9) Make WeatherStation load on startup: 
 sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
 add sudo python /home/pi/weatherStation/weatherStation.py
 
