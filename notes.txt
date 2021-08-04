@@ -21,3 +21,4 @@ add sudo python /home/pi/weatherStation/weatherStation.py
 
 
 extra notes go here?
+change again.
