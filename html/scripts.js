@@ -181,7 +181,7 @@ function getSammyDoorStatus() {
         sammyDoorStatus.status[0]["lockStatus"] == 0
       ) {
         document.getElementById("sammyDoorImg").src =
-          "http://vulture2600.dyndns.org:5016//img/sammyDoorClosed.gif";
+          "http://vulture2600.dyndns.org:5016/img/sammyDoorClosed.gif";
       } //end if.
     } //end if.
   }; //end request.
