@@ -16,9 +16,13 @@ sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
 add sudo python /home/pi/weatherStation/weatherStation.py
 
 8) Install xscreensaver and disable screen blanking: sudo apt install xscreensaver
-
-
-
-
-extra notes go here?
-change again.
+9) Enable cross origin resource sharing:
+cd /etc/apache2/sites-enabled
+sudo nano 000-default.conf
+add :
+<Directory /var/www>
+    Header set Access-Control-Allow-Origin "*"
+</Directory>
+at the bottom.
+sudo a2enmod headers
+sudo service apache2 restart
