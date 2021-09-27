@@ -8,7 +8,8 @@ function getPiData() {
 
   nocache = "&nocache=" + Math.random() * 1000000;
   var request = new XMLHttpRequest();
-  var server = "sensorValuesNew.json";
+  var server =
+    "http://vulture2600.dyndns.org:5016/mount/data/sensorValuesNew.json";
 
   request.open("GET", server, true);
 
@@ -94,7 +95,7 @@ function getPiDoors() {
   //gets door values from Raspberry Pi Model B.
   nocache = "&nocache=" + Math.random() * 100000;
   var request = new XMLHttpRequest();
-  var server = "getDoors.php";
+  var server = "http://vulture2600.dyndns.org:5016/getDoors.php";
 
   request.open("GET", server, true);
   request.onreadystatechange = function () {
@@ -103,21 +104,26 @@ function getPiDoors() {
       console.log(piDoorValues);
 
       if (piDoorValues.doorSensors[0]["mainDoor"] == 1) {
-        document.getElementById("mainDoor").src = "garageOpen.gif";
+        document.getElementById("mainDoor").src =
+          "http://vulture2600.dyndns.org:5016/img/garageOpen.gif";
       } //end if.
       else {
-        document.getElementById("mainDoor").src = "garageClosed.gif";
+        document.getElementById("mainDoor").src =
+          "http://vulture2600.dyndns.org:5016/img/garageClosed.gif";
       } //end else.
 
       if (piDoorValues.doorSensors[0]["sideDoor"] == 1) {
-        document.getElementById("sideDoor").src = "doorOpen.gif";
+        document.getElementById("sideDoor").src =
+          "http://vulture2600.dyndns.org:5016/img/doorOpen.gif";
       } //end if.
       else if (piDoorValues.doorSensors[0]["sideDoor"] == 0) {
         if (piDoorValues.doorSensors[0]["sideDoorLock"] == 1) {
-          document.getElementById("sideDoor").src = "doorUnlocked.gif";
+          document.getElementById("sideDoor").src =
+            "http://vulture2600.dyndns.org:5016/img/doorUnlocked.gif";
         } //end if.
         else if (piDoorValues.doorSensors[0]["sideDoorLock"] == 0) {
-          document.getElementById("sideDoor").src = "doorLocked.gif";
+          document.getElementById("sideDoor").src =
+            "http://vulture2600.dyndns.org:5016/img/doorLocked.gif";
         } //end else if.
       } //end else if.
     } // end if.
@@ -130,7 +136,7 @@ function getSammyDoorStatus() {
   //gets data from Raspberry Pi Model 3A+
   nocache = "&nocache=" + Math.random() * 10000;
   var request = new XMLHttpRequest();
-  var server = "/getStatus";
+  var server = "http://vulture2600.dyndns.org:5021/getStatus";
   request.open("GET", server, true);
 
   request.onreadystatechange = function () {
@@ -143,7 +149,8 @@ function getSammyDoorStatus() {
         sammyDoorStatus.status[0]["doorStatus"] == 1 ||
         sammyDoorStatus.status[0]["doorState"] == 1
       ) {
-        document.getElementById("sammyDoorImg").src = "/img/sammyDoorOpen.gif";
+        document.getElementById("sammyDoorImg").src =
+          "http://vulture2600.dyndns.org:5016/img/sammyDoorOpen.gif";
       } // end if.
       //
       //
@@ -152,7 +159,8 @@ function getSammyDoorStatus() {
         sammyDoorStatus.status[0]["doorStatus"] == 0 &&
         sammyDoorStatus.status[0]["lockStatus"] == 1
       ) {
-        document.getElementById("sammyDoorImg").src = "img/sammyDoorLocked.gif";
+        document.getElementById("sammyDoorImg").src =
+          "http://vulture2600.dyndns.org:5016/img/sammyDoorLocked.gif";
       } // end if.
       //
       //
@@ -163,7 +171,7 @@ function getSammyDoorStatus() {
         sammyDoorStatus.status[0]["lockIn"] == 1
       ) {
         document.getElementById("sammyDoorImg").src =
-          "img/sammyDoorUnLocked.gif";
+          "http://vulture2600.dyndns.org:5016/img/sammyDoorUnLocked.gif";
       } //end if.
       //
       //
@@ -173,7 +181,7 @@ function getSammyDoorStatus() {
         sammyDoorStatus.status[0]["lockStatus"] == 0
       ) {
         document.getElementById("sammyDoorImg").src =
-          "/img/sammyDoorClosed.gif";
+          "http://vulture2600.dyndns.org:5016/img/sammyDoorClosed.gif";
       } //end if.
     } //end if.
   }; //end request.
@@ -184,7 +192,7 @@ function getSammyDoorStatus() {
 function lockInEnable() {
   nocache = "&nocache=" + Math.random() * 100000;
   var request = new XMLHttpRequest();
-  var server = "/lockIn?enable=enable";
+  var server = "http://vulture2600.dyndns.org:5021/lockIn?enable=enable";
   request.open("GET", server, true);
   request.onreadystatechange = function () {
     if (request.readyState == 4 && request.status == 200) {
@@ -197,7 +205,7 @@ function lockInEnable() {
 function lockInDisable() {
   nocache = "&nocache=" + Math.random() * 100000;
   var request = new XMLHttpRequest();
-  var server = "/lockIn?enable=disable";
+  var server = "http://vulture2600.dyndns.org:5021/lockIn?enable=disable";
   request.open("GET", server, true);
   request.onreadystatechange = function () {
     if (request.readyState == 4 && request.status == 200) {
@@ -211,7 +219,7 @@ function getPiWeather() {
   //gets weather data from Raspberry Pi.
   nocache = "&nocache=" + Math.random() * 100000;
   var request = new XMLHttpRequest();
-  var server = "weatherData.json";
+  var server = "http://vulture2600.dyndns.org:5016/mount/data/weatherData.json";
 
   request.open("GET", server, true);
 
