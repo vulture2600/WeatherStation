@@ -42,9 +42,9 @@ def read_temp(file):
 				return temp_f
 
 		except:
-			return "OFF"
+			return "Off"
 	else:
-		return "OFF"
+		return "Off"
 
 
 while True:
