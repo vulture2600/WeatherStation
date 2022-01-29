@@ -1,7 +1,9 @@
 Install notes:
+1/29/22 updated for Bullseye
+
 
 1) Install Rasbian OS
-2) Install TK-Imaging: sudo apt-get install python-imaging-tk (not found bullsye)
+2) Install TK-Imaging: sudo apt-get install python3.pil.imagetk
 3) Install Apache: sudo apt-get install apache2 -y (not found in bullsye)
 4) Install PHP for Apache: sudo apt-get install php libapache2-mod-php -y
 5) Install FTP: sudo apt-get install pure-ftpd
