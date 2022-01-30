@@ -97,8 +97,6 @@ from   urllib2 import urlopen
 import base64
 import os
 
-os.system("sudo python /home/pi/weatherStation/getTemps.py &")
-
 
 
 #openweathermap.org API Key:
