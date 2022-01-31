@@ -1,14 +1,17 @@
 Install notes:
+1/29/22 updated for Bullseye
+
 
 1) Install Rasbian OS
-2) Install TK-Imaging: "sudo apt-get install python-imaging-tk"
-3) Install Apache: "sudo apt-get install apache2 -y"
-4) Install PHP for Apache: "sudo apt-get install php libapache2-mod-php -y"
-5) Install FTP: "sudo apt-get install pure-ftpd"
-6) Make directory "sudo mkdir /home/pi/weatherStation"
-7) give FTP rights to pi: "sudo chown -R pi:pi /home/pi/weatherStation and sudo chown -R pi:pi /var/www/html"
-8) Mount USB stick to html folder: "sudo nano /etc/fstab"
-add "/dev/sda1 /var/www/html/mount" 
+2) Install TK-Imaging: sudo apt-get install python3.pil.imagetk
+3) Install Apache: sudo apt-get install apache2 -y (not found in bullsye)
+4) Install PHP for Apache: sudo apt-get install php libapache2-mod-php -y
+5) Install FTP: sudo apt-get install pure-ftpd
+6) Make directory /home/pi/weatherStation
+7) give FTP rights to pi: sudo chown -R pi:pi /home/pi/weatherStation and sudo chown -R pi:pi /var/www/html
+8) Mount USB stick to html folder:
+sudo nano /etc/fstab
+add /dev/sda1 /var/www/html/mount 
 
 9) Make WeatherStation load on startup: 
 "sudo nano /etc/xdg/lxsession/LXDE-pi/autostart"
@@ -26,3 +29,4 @@ add :
 at the bottom.
 "sudo a2enmod headers"
 "sudo service apache2 restart"
+

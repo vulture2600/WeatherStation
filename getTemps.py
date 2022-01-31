@@ -42,9 +42,9 @@ def read_temp(file):
 				return temp_f
 
 		except:
-			return "OFF"
+			return "Off"
 	else:
-		return "OFF"
+		return "Off"
 
 
 while True:
@@ -89,7 +89,7 @@ while True:
 		dateTimeObj = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 		data["timestamp"].append({'dateTime': str(dateTimeObj)})
 
-		with open('/mount/data/sensorValuesNew.json', 'w') as g:
+		with open('/var/www/html/mount/data/sensorValuesNew.json', 'w') as g:
 			json.dump(data, g, indent = 2)
 		time.sleep(2)
 
