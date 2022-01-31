@@ -93,18 +93,9 @@ import time
 import datetime
 import sys
 from   requests import get
-from   urllib2 import urlopen
 import base64
 import os
 
-
-
-#openweathermap.org API Key:
-apiKey    = 'ce6df52db591b8e6b40f75c864518b61'
-#Minneapolis, MN, USA.
-lattitude = '44.9398'
-longitude = '-93.2533'
-units     = 'imperial'
 
 
 #digital door sensor pins:
@@ -261,9 +252,6 @@ def updateTemps():
 	dateTime_value = []
 
 	try:
-
-
-
 		with open('/var/www/html/mount/data/sensorValuesNew.json', 'r') as f:
 			data       = f.read()
 			dataString = json.loads(data)
@@ -271,8 +259,6 @@ def updateTemps():
 
 		for dateTime in dataString['timestamp']:
 			dateTime_value = (dateTime['dateTime'])
-
-
 
 		tempLivingRoom.set(str(dataString['sensors']['livingRoom']['temp']) + degree_sign + "F")
 		tempOut       .set(str(dataString['sensors']['outside']['temp'])    + degree_sign + "F")
@@ -325,11 +311,11 @@ def getTime():
 	root.after(500, getTime)
 
 def getWeather():
-	#get data from openweathermap.org:
-	url = 'http://api.openweathermap.org/data/2.5/onecall?lat=' + lattitude + '&lon=' + longitude + '&exclude=minutely,hourly&appid=' + apiKey + '&units=' + units
-
 	try:
-		weatherData = get(url).json()
+		with open('/var/www/html/mount/data/sensorValuesNew.json', 'r') as f:
+			data       = f.read()
+			weatherData = json.loads(data)
+		f.close()
 
 #		print weatherData
 
@@ -351,14 +337,11 @@ def getWeather():
 		weatherIconLabel.image = weatherIcon
 
 		#weatherData["current"].append({'timeStamp': str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))})
-
-		with open('/var/www/html/mount/data/weatherData.json', 'w') as f:
-			json.dump(weatherData, f, indent = 2)
 	except:
 		pass
 
 	#update every 10 minutes
-	root.after(600000, getWeather)
+	root.after(2000, getWeather)
 
 
 root.after(1000, getWeather)

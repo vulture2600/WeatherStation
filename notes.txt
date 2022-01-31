@@ -16,6 +16,7 @@ add /dev/sda1 /var/www/html/mount
 9) Make WeatherStation load on startup: 
 "sudo nano /etc/xdg/lxsession/LXDE-pi/autostart"
 add "sudo python /home/pi/weatherStation/getTemps.py &"
+add "sudo python /home/pi/weatherStation/getWeather.py &"
 add "sudo python /home/pi/weatherStation/weatherStation.py"
 
 8) Install xscreensaver and disable screen blanking: sudo apt install xscreensaver
