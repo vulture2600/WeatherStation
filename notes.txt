@@ -14,18 +14,19 @@ sudo nano /etc/fstab
 add /dev/sda1 /var/www/html/mount 
 
 9) Make WeatherStation load on startup: 
-sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
-add sudo python /home/pi/weatherStation/weatherStation.py
+"sudo nano /etc/xdg/lxsession/LXDE-pi/autostart"
+add "sudo python /home/pi/weatherStation/getTemps.py &"
+add "sudo python /home/pi/weatherStation/weatherStation.py"
 
 8) Install xscreensaver and disable screen blanking: sudo apt install xscreensaver
 9) Enable cross origin resource sharing:
-cd /etc/apache2/sites-enabled
-sudo nano 000-default.conf
+"cd /etc/apache2/sites-enabled"
+"sudo nano 000-default.conf"
 add :
-<Directory /var/www>
+"<Directory /var/www>
     Header set Access-Control-Allow-Origin "*"
-</Directory>
+</Directory>"
 at the bottom.
-sudo a2enmod headers
-sudo service apache2 restart
-test 123
+"sudo a2enmod headers"
+"sudo service apache2 restart"
+
