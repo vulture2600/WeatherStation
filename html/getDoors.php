@@ -1,16 +1,16 @@
 <?php
-
+//updated for bullsye. gpio command replaced with raspi-gpio
 echo '{"doorSensors" : [{"sideDoorLock": ';
-$setmode4 = shell_exec("/usr/local/bin/gpio -g mode 4 in");
-$status = shell_exec('gpio read 4');
-echo $status;
+$status4 = shell_exec("./getIO.sh 23");
+echo $status4;
+
 echo ', "sideDoor": ';
-$setmode3 = shell_exec("/usr/local/bin/gpio -g mode 3 in");
-$status = shell_exec('gpio read 3');
-echo $status;
+$status3 = shell_exec('./getIO.sh 22');
+echo $status3;
+
 echo ', "mainDoor": ';
-$setmode2 = shell_exec("/usr/local/bin/gpio -g mode 2 in");
-$status = shell_exec('gpio read 2');
-echo $status;
+$status2 = shell_exec('./getIO.sh 27');
+echo $status2;
 echo '}]}'
 ?>
+
