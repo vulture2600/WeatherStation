@@ -21,7 +21,7 @@ while True:
         weatherData = get(url).json()
         with open('/var/www/html/mount/data/weatherData.json', 'w') as f:
 	        json.dump(weatherData, f, indent = 2)
-        time.sleep(600)
+        time.sleep(6000)
 
     except:
         pass
