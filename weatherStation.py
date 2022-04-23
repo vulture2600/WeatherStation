@@ -81,12 +81,11 @@
 # Brown        : I2C SCL
 
 
-from   Tkinter import *
-import Tkinter as tk
-from   Tkinter import Canvas
+from   tkinter import *
+import tkinter as tk
+from   Ttkinter import Canvas
 from   PIL import ImageTk, Image
 import threading
-import tkFont
 import RPi.GPIO as GPIO
 import json
 import time
@@ -95,6 +94,7 @@ import sys
 from   requests import get
 import base64
 import os
+import urllib.request
 
 
 
@@ -312,7 +312,7 @@ def getTime():
 
 def getWeather():
 	try:
-		with open('/var/www/html/mount/data/sensorValuesNew.json', 'r') as f:
+		with open('/var/www/html/mount/data/weatherData.json', 'r') as f:
 			data       = f.read()
 			weatherData = json.loads(data)
 		f.close()
@@ -328,9 +328,9 @@ def getWeather():
 		weatherIconCode = weatherData['current']['weather'][0]['icon']
 
 		#get weather icon and convert:
-		imageUrl = "http://openweathermap.org/img/wn/" + weatherIconCode + "@2x.png"
-		weatherIconByt = urlopen(imageUrl).read()
-		weatherIconB64 = base64.encodestring(weatherIconByt)
+		imageUrl = urllib.request.urlopen ('http://openweathermap.org/img/wn/' + weatherIconCode + '@2x.png')
+		weatherIconByt = imageUrl.read()
+		weatherIconB64 = base64.b64encode(weatherIconByt)
 
 		weatherIcon = PhotoImage(data = weatherIconB64)
 		weatherIconLabel.configure(image = weatherIcon)
