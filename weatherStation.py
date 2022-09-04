@@ -83,7 +83,7 @@
 
 from   tkinter import *
 import tkinter as tk
-from   Ttkinter import Canvas
+from   tkinter import Canvas
 from   PIL import ImageTk, Image
 import threading
 import RPi.GPIO as GPIO
