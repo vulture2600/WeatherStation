@@ -21,7 +21,7 @@ while True:
         weatherData = get(url).json()
         with open('/var/www/html/mount/data/weatherData.json', 'w') as f:
 	        json.dump(weatherData, f, indent = 2)
-        time.sleep(600000)
+        time.sleep(600) # update every ten minutes (60s x 10 minutes)
 
     except:
         pass
