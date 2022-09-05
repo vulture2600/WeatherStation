@@ -20,22 +20,22 @@
 # Sparkfun RJ45 8-Pin Connector sparkfun.com/products/643
 # Dallas OneWire DS18B20 Digital Temp Sensors
 #
-#
-#
+# 9/5/22 : changed main sensor bus to 5v to account for cable length. OneWire sensors are now powered by 5v, but
+# the OneWire bus pullup resistor is tied to 3.3v.
 #
 # ------------
 # GPIO Pins used:
 # Pys Name      BCM        Patched Thru          Patched To
-# 1 ) 3.3v		-> cat5e orange       -> 3.3v
-# 2 ) 5.0v
+# 1 ) 3.3v		
+# 2 ) 5.0v	 			-> cat5e orange       -> 5v
 # 3 ) SDA       GPIO 2  -> cat5e white/brown  -> I2C SDA
 # 4 ) 5.0v
-# 5 ) SCL	GPIO 3	-> cat5e brown        -> I2C SCL
-# 6 ) Gnd		-> cat5e white/orange -> Gnd
+# 5 ) SCL		GPIO 3	-> cat5e brown        -> I2C SCL
+# 6 ) Gnd				-> cat5e white/orange -> Gnd
 # 7 ) GPIO 7 -> GPIO 4  -> cat5e white/green  -> OneWire Bus
-# 8 ) TXD	GPIO 14
+# 8 ) TXD		GPIO 14
 # 9 ) Gnd
-# 10) RXD	GPIO 15
+# 10) RXD		GPIO 15
 # 11) GPIO 0 -> GPIO 17
 # 12) GPIO 1 -> GPIO 18
 # 13) GPIO 2 -> GPIO 27 -> cat5e blue         -> Main Door Sensor
@@ -56,23 +56,23 @@
 # 26) SPI CE1   GPIO 7
 # 27) ID SD
 # 28) ID SC
-# 29) 		GPIO 5
+# 29) 			GPIO 5
 # 30) Gnd
-# 31) 		GPIO 6
-# 32)		GPIO 12
-# 33)		GPIO 13
+# 31) 			GPIO 6
+# 32)			GPIO 12
+# 33)			GPIO 13
 # 34) Gnd
-# 35) PCM	GPIO 19
-# 36) 		GPIO 16
-# 37)		GPIO 26
-# 38)		GPIO 20
+# 35) PCM		GPIO 19
+# 36) 			GPIO 16
+# 37)			GPIO 26
+# 38)			GPIO 20
 # 39) Gnd
-# 40) 		GPIO 21
+# 40) 			GPIO 21
 
 # -------
 # Cat5e Pinout :
 # White/Orange : Gnd
-# Orange       : 3.3v
+# Orange       : 5v
 # White/Green  : OneWire
 # Blue         : Main Door Sensor
 # White/Blue   : Side Door Sensor
