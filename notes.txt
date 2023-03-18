@@ -1,6 +1,6 @@
 Install notes:
 1/29/22 updated for Bullseye
-
+11/12/22 no longer booting from SD card, booting from USB drive. json files will be stored locally
 
 1) Install Rasbian OS
 2) Install TK-Imaging: sudo apt-get install python3.pil.imagetk
@@ -9,7 +9,7 @@ Install notes:
 5) Install FTP: sudo apt-get install pure-ftpd
 6) Make directory /home/pi/weatherStation and /var/www/html/mount/data
 7) give FTP rights to pi: sudo chown -R pi:pi /home/pi/weatherStation and sudo chown -R pi:pi /var/www/html
-8) Mount USB stick to html folder:
+8) Mount USB stick to html folder: // no longer used
 sudo nano /etc/fstab
 add /dev/sda1 /var/www/html/mount 
 
@@ -46,7 +46,7 @@ set pullups:
 "raspi-gpio set XX pu" where XX is 22, 23, 27
 
 Make getIO.sh executable:
-sudo chmod +x /home/pi/weatherStation/getIO.sh
+sudo chmod +x /var/www/html/getIO.sh
 
 
 
