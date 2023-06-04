@@ -144,7 +144,7 @@ weatherIconLabel.place (x = 30, y = 60)
 
 #temp sensor strings:
 insideAvgTemp  = StringVar()
-tempLivingRoom = StringVar()
+tempAttic	   = StringVar()
 tempUpstairs   = StringVar()
 tempBasement   = StringVar()
 tempOut        = StringVar()
@@ -204,11 +204,11 @@ humidityLabel.place(x = 440, y = 190)
 humidityLabelValue = Label(root, fg = "blue", background = "#00dbde", textvariable = humidity, font = ("Helvetica", 25, "bold"), borderwidth = 0)
 humidityLabelValue.place(x = 685, y = 190)
 
-tempLivingRoomLabel = Label(root, fg = "blue", background = "#00dbde", text = "Living Room: ", font = ("Helvetica", 25), borderwidth = 0)
-tempLivingRoomLabel.place(x = 440, y = 230)
+tempAtticLabel = Label(root, fg = "blue", background = "#00dbde", text = "Attic: ", font = ("Helvetica", 25), borderwidth = 0)
+tempAtticLabel.place(x = 440, y = 230)
 
-tempLivingRoomValueLabel = Label(root, fg = "blue", background = "#00dbde", textvariable = tempLivingRoom, font = ("Helvetica", 25, "bold"), borderwidth = 0)
-tempLivingRoomValueLabel.place(x = 685, y = 230)
+tempAtticValueLabel = Label(root, fg = "blue", background = "#00dbde", textvariable = tempAttic, font = ("Helvetica", 25, "bold"), borderwidth = 0)
+tempAtticValueLabel.place(x = 685, y = 230)
 
 tempUpstairsLabel = Label(root, fg= "blue", background = "#00dbde", text = "Upstairs: ", font = ("Helvetica", 25), borderwidth = 0)
 tempUpstairsLabel.place(x = 440, y = 270)
@@ -260,17 +260,15 @@ def updateTemps():
 		for dateTime in dataString['timestamp']:
 			dateTime_value = (dateTime['dateTime'])
 
-		tempLivingRoom.set(str(dataString['sensors']['livingRoom']['temp']) + degree_sign + "F")
+		tempAttic	  .set(str(dataString['sensors']['attic']['temp']) 		+ degree_sign + "F")
 		tempOut       .set(str(dataString['sensors']['outside']['temp'])    + degree_sign + "F")
 		tempGarage    .set(str(dataString['sensors']['garage']['temp'])     + degree_sign + "F")
 		tempUpstairs  .set(str(dataString['sensors']['upstairs']['temp'])   + degree_sign + "F")
 		tempBasement  .set(str(dataString['sensors']['basement']['temp'])   + degree_sign + "F")
 		tempFreezer   .set(str(dataString['sensors']['freezer']['temp'])    + degree_sign + "F")
-
+		insideAvgTemp .set(str(dataString['sensors']['livingRoom']['temp']) + degree_sign + "F")
 		timeStamp     .set(str(dateTime_value))
 
-		avg = format( float( float( int(dataString['sensors']['livingRoom']['temp']) ) + float( int(dataString['sensors']['upstairs']['temp']) ) / 2.0), '.1f')
-		insideAvgTemp.set(str(avg) + degree_sign + "F")
 
 	except:
 		pass
