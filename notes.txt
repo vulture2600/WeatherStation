@@ -1,21 +1,22 @@
 Install notes:
 1/29/22 updated for Bullseye
-
+11/12/22 no longer booting from SD card, booting from USB drive. json files will be stored locally
 
 1) Install Rasbian OS
 2) Install TK-Imaging: sudo apt-get install python3.pil.imagetk
-3) Install Apache: sudo apt-get install apache2 -y (not found in bullsye)
+3) Install Apache: sudo apt-get install apache2 -y 
 4) Install PHP for Apache: sudo apt-get install php libapache2-mod-php -y
 5) Install FTP: sudo apt-get install pure-ftpd
-6) Make directory /home/pi/weatherStation
+6) Make directory /home/pi/weatherStation and /var/www/html/mount/data
 7) give FTP rights to pi: sudo chown -R pi:pi /home/pi/weatherStation and sudo chown -R pi:pi /var/www/html
-8) Mount USB stick to html folder:
+8) Mount USB stick to html folder: // no longer used
 sudo nano /etc/fstab
 add /dev/sda1 /var/www/html/mount 
 
 9) Make WeatherStation load on startup: 
 "sudo nano /etc/xdg/lxsession/LXDE-pi/autostart"
 add "sudo python /home/pi/weatherStation/getTemps.py &"
+add "sudo python /home/pi/weatherStation/getWeather.py &"
 add "sudo python /home/pi/weatherStation/weatherStation.py"
 
 8) Install xscreensaver and disable screen blanking: sudo apt install xscreensaver
@@ -29,4 +30,23 @@ add :
 at the bottom.
 "sudo a2enmod headers"
 "sudo service apache2 restart"
+
+copy files to /home/pi/weatherStation.
+copy files to /var/www/hmtl/
+
+install dos2unix:
+"sudo apt-get install dos2unix"
+convert getIO.sh to unix:
+"sudo dos2unix -n getIO.sh getIO.sh"
+
+run for file permissions:
+"sudo chmod +s /bin/raspi-gpio"
+
+set pullups:
+"raspi-gpio set XX pu" where XX is 22, 23, 27
+
+Make getIO.sh executable:
+sudo chmod +x /var/www/html/getIO.sh
+
+
 

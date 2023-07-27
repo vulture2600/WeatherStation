@@ -20,22 +20,22 @@
 # Sparkfun RJ45 8-Pin Connector sparkfun.com/products/643
 # Dallas OneWire DS18B20 Digital Temp Sensors
 #
-#
-#
+# 9/5/22 : changed main sensor bus to 5v to account for cable length. OneWire sensors are now powered by 5v, but
+# the OneWire bus pullup resistor is tied to 3.3v.
 #
 # ------------
 # GPIO Pins used:
 # Pys Name      BCM        Patched Thru          Patched To
-# 1 ) 3.3v		-> cat5e orange       -> 3.3v
-# 2 ) 5.0v
+# 1 ) 3.3v		
+# 2 ) 5.0v	 			-> cat5e orange       -> 5v
 # 3 ) SDA       GPIO 2  -> cat5e white/brown  -> I2C SDA
 # 4 ) 5.0v
-# 5 ) SCL	GPIO 3	-> cat5e brown        -> I2C SCL
-# 6 ) Gnd		-> cat5e white/orange -> Gnd
+# 5 ) SCL		GPIO 3	-> cat5e brown        -> I2C SCL
+# 6 ) Gnd				-> cat5e white/orange -> Gnd
 # 7 ) GPIO 7 -> GPIO 4  -> cat5e white/green  -> OneWire Bus
-# 8 ) TXD	GPIO 14
+# 8 ) TXD		GPIO 14
 # 9 ) Gnd
-# 10) RXD	GPIO 15
+# 10) RXD		GPIO 15
 # 11) GPIO 0 -> GPIO 17
 # 12) GPIO 1 -> GPIO 18
 # 13) GPIO 2 -> GPIO 27 -> cat5e blue         -> Main Door Sensor
@@ -56,23 +56,23 @@
 # 26) SPI CE1   GPIO 7
 # 27) ID SD
 # 28) ID SC
-# 29) 		GPIO 5
+# 29) 			GPIO 5
 # 30) Gnd
-# 31) 		GPIO 6
-# 32)		GPIO 12
-# 33)		GPIO 13
+# 31) 			GPIO 6
+# 32)			GPIO 12
+# 33)			GPIO 13
 # 34) Gnd
-# 35) PCM	GPIO 19
-# 36) 		GPIO 16
-# 37)		GPIO 26
-# 38)		GPIO 20
+# 35) PCM		GPIO 19
+# 36) 			GPIO 16
+# 37)			GPIO 26
+# 38)			GPIO 20
 # 39) Gnd
-# 40) 		GPIO 21
+# 40) 			GPIO 21
 
 # -------
 # Cat5e Pinout :
 # White/Orange : Gnd
-# Orange       : 3.3v
+# Orange       : 5v
 # White/Green  : OneWire
 # Blue         : Main Door Sensor
 # White/Blue   : Side Door Sensor
@@ -81,30 +81,21 @@
 # Brown        : I2C SCL
 
 
-from   Tkinter import *
-import Tkinter as tk
-from   Tkinter import Canvas
+from   tkinter import *
+import tkinter as tk
+from   tkinter import Canvas
 from   PIL import ImageTk, Image
 import threading
-import tkFont
 import RPi.GPIO as GPIO
 import json
 import time
 import datetime
 import sys
 from   requests import get
-from   urllib2 import urlopen
 import base64
 import os
+import urllib.request
 
-
-
-#openweathermap.org API Key:
-apiKey    = 'ce6df52db591b8e6b40f75c864518b61'
-#Minneapolis, MN, USA.
-lattitude = '44.9398'
-longitude = '-93.2533'
-units     = 'imperial'
 
 
 #digital door sensor pins:
@@ -153,7 +144,7 @@ weatherIconLabel.place (x = 30, y = 60)
 
 #temp sensor strings:
 insideAvgTemp  = StringVar()
-tempLivingRoom = StringVar()
+tempAttic	   = StringVar()
 tempUpstairs   = StringVar()
 tempBasement   = StringVar()
 tempOut        = StringVar()
@@ -213,11 +204,11 @@ humidityLabel.place(x = 440, y = 190)
 humidityLabelValue = Label(root, fg = "blue", background = "#00dbde", textvariable = humidity, font = ("Helvetica", 25, "bold"), borderwidth = 0)
 humidityLabelValue.place(x = 685, y = 190)
 
-tempLivingRoomLabel = Label(root, fg = "blue", background = "#00dbde", text = "Living Room: ", font = ("Helvetica", 25), borderwidth = 0)
-tempLivingRoomLabel.place(x = 440, y = 230)
+tempAtticLabel = Label(root, fg = "blue", background = "#00dbde", text = "Attic: ", font = ("Helvetica", 25), borderwidth = 0)
+tempAtticLabel.place(x = 440, y = 230)
 
-tempLivingRoomValueLabel = Label(root, fg = "blue", background = "#00dbde", textvariable = tempLivingRoom, font = ("Helvetica", 25, "bold"), borderwidth = 0)
-tempLivingRoomValueLabel.place(x = 685, y = 230)
+tempAtticValueLabel = Label(root, fg = "blue", background = "#00dbde", textvariable = tempAttic, font = ("Helvetica", 25, "bold"), borderwidth = 0)
+tempAtticValueLabel.place(x = 685, y = 230)
 
 tempUpstairsLabel = Label(root, fg= "blue", background = "#00dbde", text = "Upstairs: ", font = ("Helvetica", 25), borderwidth = 0)
 tempUpstairsLabel.place(x = 440, y = 270)
@@ -261,9 +252,6 @@ def updateTemps():
 	dateTime_value = []
 
 	try:
-
-
-
 		with open('/var/www/html/mount/data/sensorValuesNew.json', 'r') as f:
 			data       = f.read()
 			dataString = json.loads(data)
@@ -272,19 +260,15 @@ def updateTemps():
 		for dateTime in dataString['timestamp']:
 			dateTime_value = (dateTime['dateTime'])
 
-
-
-		tempLivingRoom.set(str(dataString['sensors']['livingRoom']['temp']) + degree_sign + "F")
+		tempAttic	  .set(str(dataString['sensors']['attic']['temp']) 		+ degree_sign + "F")
 		tempOut       .set(str(dataString['sensors']['outside']['temp'])    + degree_sign + "F")
 		tempGarage    .set(str(dataString['sensors']['garage']['temp'])     + degree_sign + "F")
 		tempUpstairs  .set(str(dataString['sensors']['upstairs']['temp'])   + degree_sign + "F")
 		tempBasement  .set(str(dataString['sensors']['basement']['temp'])   + degree_sign + "F")
 		tempFreezer   .set(str(dataString['sensors']['freezer']['temp'])    + degree_sign + "F")
-
+		insideAvgTemp .set(str(dataString['sensors']['livingRoom']['temp']) + degree_sign + "F")
 		timeStamp     .set(str(dateTime_value))
 
-		avg = format( float( float( int(dataString['sensors']['livingRoom']['temp']) ) + float( int(dataString['sensors']['upstairs']['temp']) ) / 2.0), '.1f')
-		insideAvgTemp.set(str(avg) + degree_sign + "F")
 
 	except:
 		pass
@@ -325,11 +309,11 @@ def getTime():
 	root.after(500, getTime)
 
 def getWeather():
-	#get data from openweathermap.org:
-	url = 'http://api.openweathermap.org/data/2.5/onecall?lat=' + lattitude + '&lon=' + longitude + '&exclude=minutely,hourly&appid=' + apiKey + '&units=' + units
-
 	try:
-		weatherData = get(url).json()
+		with open('/var/www/html/mount/data/weatherData.json', 'r') as f:
+			data       = f.read()
+			weatherData = json.loads(data)
+		f.close()
 
 #		print weatherData
 
@@ -342,23 +326,20 @@ def getWeather():
 		weatherIconCode = weatherData['current']['weather'][0]['icon']
 
 		#get weather icon and convert:
-		imageUrl = "http://openweathermap.org/img/wn/" + weatherIconCode + "@2x.png"
-		weatherIconByt = urlopen(imageUrl).read()
-		weatherIconB64 = base64.encodestring(weatherIconByt)
+		imageUrl = urllib.request.urlopen ('http://openweathermap.org/img/wn/' + weatherIconCode + '@2x.png')
+		weatherIconByt = imageUrl.read()
+		weatherIconB64 = base64.b64encode(weatherIconByt)
 
 		weatherIcon = PhotoImage(data = weatherIconB64)
 		weatherIconLabel.configure(image = weatherIcon)
 		weatherIconLabel.image = weatherIcon
 
 		#weatherData["current"].append({'timeStamp': str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))})
-
-		with open('/var/www/html/mount/data/weatherData.json', 'w') as f:
-			json.dump(weatherData, f, indent = 2)
 	except:
 		pass
 
 	#update every 10 minutes
-	root.after(600000, getWeather)
+	root.after(2000, getWeather)
 
 
 root.after(1000, getWeather)
