@@ -120,11 +120,11 @@ def reassign_sensor_to_room():
 				print(" ")
 
 			print("Input 1 - " + str(len(rooms)) + ". Enter zero to leave unassigned.")
-			assignment = int(raw_input())
+			assignment = int(input())
 
 			while (assignment > len(rooms)):
 				print("Assignment out of range. Please enter 0 - " + str(len(rooms)) + ".")
-				assignment = int(raw_input())
+				assignment = int(input())
 
 			if (assignment == 0):
 				print("Sensor " + str(sensorIds[sensor]) + " remains unassigned.")
@@ -199,14 +199,14 @@ for sensor in range(len(sensorIds)):
 print(" ")
 print(" ")
 print("Do you want to reassign sensors? Y/N?")
-sensorReassign = raw_input()
+sensorReassign = input()
 #print(str(sensorReassign))
 
 if (sensorReassign == 'y' or sensorReassign == 'Y'):
 	print("Do you want to")
 	print("1, Reassign all sensors to rooms?")
 	#print("2, Assign only unassigned sensors?")
-	sensorReassignType = int(raw_input())
+	sensorReassignType = int(input())
 
 	if (sensorReassignType == 1):
 		reassign_sensor_to_room()
