@@ -1,3 +1,4 @@
+					print("Sensor ID: " + str(sensorIds[sensor]) + "  Assigned to: ---- UNASSIGNED ---  Temp = " + str(read_temp(sensorIds[sensor])) + "F.")
 # -------------------------------
 # WeatherStation for Raspberry Pi 3 Model B+
 # steve.a.mccluskey@gmail.com
@@ -26,7 +27,7 @@
 # ------------
 # GPIO Pins used:
 # Pys Name      BCM        Patched Thru          Patched To
-# 1 ) 3.3v		
+# 1 ) 3.3v
 # 2 ) 5.0v	 			-> cat5e orange       -> 5v
 # 3 ) SDA       GPIO 2  -> cat5e white/brown  -> I2C SDA
 # 4 ) 5.0v
@@ -92,6 +93,7 @@ import time
 import datetime
 import sys
 from   requests import get
+#from urllib2 import urlopen
 import base64
 import os
 import urllib.request
@@ -252,10 +254,8 @@ def updateTemps():
 	dateTime_value = []
 
 	try:
-		with open('/var/www/html/mount/data/sensorValuesNew.json', 'r') as f:
-			data       = f.read()
-			dataString = json.loads(data)
-		f.close()
+		url = 'http://192.168.1.14:81/mount/data/sensorValuesNew.json'
+		dataString = get(url).json()
 
 		for dateTime in dataString['timestamp']:
 			dateTime_value = (dateTime['dateTime'])
@@ -275,7 +275,8 @@ def updateTemps():
 
 	root.after(2000, updateTemps)
 
-
+#local GPIO:
+'''
 def getDoors():
 	#side door open and unlocked:
 	if(GPIO.input(sideDoorPin) == GPIO.HIGH):
@@ -302,6 +303,49 @@ def getDoors():
 		mainDoorLabel.image = garageClosedIcon
 
 	root.after(2000, getDoors)
+'''
+
+
+#get from remote:
+def getDoors():
+	try:
+		url = 'http://192.168.1.14:81/getDoors.php'
+		data = get(url).json()
+
+		for doorSensors in data['doorSensors']:
+			doorSensor = doorSensors['sideDoor']
+			lockSensor = doorSensors['sideDoorLock']
+			mainDoor   = doorSensors['mainDoor']
+
+		#side door open and unlocked:
+		if (int(doorSensor) == 1):
+			sideDoorLabel.configure(image = doorOpenIcon)
+			sideDoorLabel.image = doorOpenIcon
+
+		#closed and unlocked:
+		elif (int(doorSensor) == 0):
+			if (int(lockSensor) == 1):
+				sideDoorLabel.configure(image = doorUnlockedIcon)
+				sideDoorLabel.image = doorUnlockedIcon
+
+		#closed and locked:
+			elif (int(lockSensor) == 0):
+				sideDoorLabel.configure(image = doorLockedIcon)
+				sideDoorLabel.image = doorLockedIcon
+
+		#mainDoor:
+		if (int(mainDoor) == 1):
+			mainDoorLabel.configure(image = garageOpenIcon)
+			mainDoorLabel.image = garageOpenIcon
+
+		elif (int(mainDoor) == 0):
+			mainDoorLabel.configure(image = garageClosedIcon)
+			mainDoorLabel.image = garageClosedIcon
+
+	except:
+		pass
+
+	root.after(2000, getDoors)
 
 
 def getTime():
@@ -309,14 +353,19 @@ def getTime():
 	root.after(500, getTime)
 
 def getWeather():
+	url = 'http://192.168.1.14:81/mount/data/weatherData.json'
+
 	try:
-		with open('/var/www/html/mount/data/weatherData.json', 'r') as f:
-			data       = f.read()
-			weatherData = json.loads(data)
-		f.close()
+		weatherData = get(url).json()
+
+#		with open('http://192.168.1.14:81/mount/data/weatherData.json', 'r') as f:
+#			data       = f.read()
+#			weatherData = json.loads(data)
+#		f.close()
 
 #		print weatherData
 
+	
 		#set values from json data:
 		humidity.set(str(weatherData['current']['humidity']) + "%")
 		tempFeelsLike.set(str(int(round(weatherData['current']['feels_like']))) + degree_sign + "F")
